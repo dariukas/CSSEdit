@@ -34,8 +34,8 @@ addLabel(divElement, identity, feature+": ");
 document.getElementById("editbox").appendChild(divElement);
 this.divElement=divElement;
 this.parameters=parameters;
-if(parameters.spinner==true){console.log("added spinner!"); addSpinner(this.divElement, identity);};
-if(parameters.select==true){addSelect(this.divElement, identity, options);};
+if(parameters.spinner==true){addSpinner(this.divElement, identity);};
+if(parameters.select==true){addSelectMenu(this.divElement, identity, options);};
 if(parameters.picker==true){addPicker(this.divElement, identity);};
 if(parameters.checkboard!=false){addCheckboard(this.divElement, identity);};//this trick makes checkboard by default
 }
@@ -44,7 +44,7 @@ if(parameters.checkboard!=false){addCheckboard(this.divElement, identity);};//th
 DivElement.prototype.addLabel=function(identity, feature) {addLabel(this.divElement, identity, feature);};
 DivElement.prototype.addCheckboard=function(identity) {addCheckboard(this.divElement, identity); parameters.checkboard=true;};
 DivElement.prototype.addSpinner=function(identity) {addSpinner(this.divElement, identity); parameters.spinner=true;};
-DivElement.prototype.addSelect=function(identity, options) {addSelect(this.divElement, identity, options); parameters.select=true;};
+DivElement.prototype.addSelectMenu=function(identity, options) {addSelectMenu(this.divElement, identity, options); parameters.select=true;};
 DivElement.prototype.addPicker=function(identity) {addPicker(this.divElement, identity); parameters.picker=true;};
 //console.log(Object.getOwnPropertyNames(newDiv));
 
@@ -67,7 +67,7 @@ divElement.appendChild(cbElement);
 }
 
 /*<fieldset></fieldset>*/
-function addSelect(divElement, identity, options){
+function addSelectMenu(divElement, identity, options){
 var selectElement = document.createElement('select');
 var menuID = identity+"menu";
 selectElement.id = menuID;
@@ -101,7 +101,7 @@ buttonElement.id=identity+"toggle";
 buttonElement.innerHTML="\u23F9";
 divElement.appendChild(buttonElement);
 //jQuery UI
-    var spinner = $("#"+spinnerID).spinner();
+    var spinner = $("#"+spinnerID).spinner({min: 0, step: 1});
     $( "#"+buttonElement.id ).click(function() {
       if ( spinner.spinner( "option", "disabled" ) ) {
         spinner.spinner( "enable" );
